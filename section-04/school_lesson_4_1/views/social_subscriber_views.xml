@@ -40,7 +40,11 @@
                 as it can brake the view inheritance logic.
             -->
             <xpath expr="//field[@name='email']" position="replace"/>
-            <!-- RECOMMENDED APPROACH: To hide the unnecessary field -->
+
+            <!-- RECOMMENDED APPROACH: To hide the unnecessary field.
+                 Uncomment the block below, and you'll get an error,
+                 that will disappear when you comment the block with "replace" (above)
+            -->
 <!--            <xpath expr="//field[@name='email']" position="attributes">-->
 <!--                <attribute name="invisible">True</attribute>-->
 <!--            </xpath>-->
