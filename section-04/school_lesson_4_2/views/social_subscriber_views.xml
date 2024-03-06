@@ -2,7 +2,7 @@
 <odoo>
 
     <record id="social_subscriber_alternate_view_tree" model="ir.ui.view">
-        <field name="name">social.subscriber.view.form.inherit.school_lesson_4_2</field>
+        <field name="name">social.subscriber.alternate.tree</field>
         <field name="model">social.subscriber</field>
         <field name="priority" eval="100"/>
         <field name="arch" type="xml">
@@ -24,7 +24,7 @@
 <!-- Additional options for the "tree" tag -->
 <!--                    create="true"-->
 <!--                    edit="true"-->        <!-- Do not use together with the "editable" -->
-<!--                    duplicate="true"-->
+<!--                    duplicate="1"-->
 <!--                    import="false"-->
 <!--                    expand="1"-->
 <!--                    multi_edit="true"-->
