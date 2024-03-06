@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Menu items with a hierarchy (you may do not specify the "parent_id") -->
+    <menuitem id="menu_social_root" name="Social" web_icon="school_lesson_4_1,static/description/icon.png" sequence="1">
+        <menuitem id="menu_social_subscribers" name="Subscribers" sequence="10"/>
+    </menuitem>
+
+    <!-- Menu items with the "parent_id" -->
+    <menuitem id="menu_social_subscribers" name="Subscribers" parent="menu_social_root" action="school_lesson_3_1.action_social_subscriber_list" sequence="10"/>
+    <menuitem id="menu_social_promotions" name="Promotions" parent="menu_social_root" action="school_lesson_3_4.action_social_promo_list" sequence="20"/>
+
+</odoo>

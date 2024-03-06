@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- Tom: add a value for the "profile_url" field (Rewrite) -->
+    <record id="school_lesson_3_4.subscriber_tom" model="social.subscriber">
+        <field name="profile_url">https://www.facebook.com/GarazdCreation/</field>
+    </record>
+    <!-- Alise: add a value for the "profile_url" field (Rewrite) -->
+    <record id="school_lesson_3_4.subscriber_alise" model="social.subscriber">
+        <field name="profile_url">https://youtube.com/@GarazdCreation</field>
+    </record>
+    <!-- John: add a value for the "profile_url" field (Rewrite) -->
+    <record id="school_lesson_3_4.subscriber_john" model="social.subscriber">
+        <field name="profile_url">https://twitter.com/garazdcreation</field>
+    </record>
+    <!-- Patrick: add a value for the "profile_url" field (Rewrite) -->
+    <record id="school_lesson_3_4.subscriber_patrick" model="social.subscriber">
+        <field name="profile_url">https://www.linkedin.com/company/garazd-creation</field>
+    </record>
+
+</odoo>

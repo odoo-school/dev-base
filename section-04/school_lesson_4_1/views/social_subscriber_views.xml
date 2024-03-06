@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="social_subscriber_view_form" model="ir.ui.view">
+        <field name="name">social.subscriber.view.form.inherit.school_lesson_4_1</field>
+        <field name="model">social.subscriber</field>
+        <field name="inherit_id" ref="school_lesson_3_6.social_subscriber_view_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Change the field widget using the "attributes" position -->
+            <xpath expr="//field[@name='social_service']" position="attributes">
+                <attribute name="widget">selection_badge</attribute>
+            </xpath>
+
+            <!-- Move the "Profile" notebook tab to the first place -->
+            <xpath expr="//notebook/page" position="before">
+                <xpath expr="//page[@name='html_field']" position="move"/>
+            </xpath>
+
+            <!-- Add a field and a button (in one row) -->
+            <field name="is_confirmed" position="after">
+                <label for="profile_url"/>
+                <div class="o_row">
+                    <field name="profile_url" widget="url"/>
+                    <button name="action_open_profile"
+                            title="Open the profile link"
+                            type="object"
+                            class="btn-secondary"
+                            icon="fa-external-link"
+                            confirm="Do you want open this external link?"
+                            invisible="not profile_url"
+                            colspan="2"
+                    />
+                </div>
+            </field>
+
+            <!-- Remove/Hide some field -->
+            <!--
+                WARNING! This approach is strongly NOT RECOMMENDED,
+                as it can brake the view inheritance logic.
+            -->
+            <xpath expr="//field[@name='email']" position="replace"/>
+            <!-- RECOMMENDED APPROACH: To hide the unnecessary field -->
+<!--            <xpath expr="//field[@name='email']" position="attributes">-->
+<!--                <attribute name="invisible">True</attribute>-->
+<!--            </xpath>-->
+
+        </field>
+    </record>
+
+</odoo>
