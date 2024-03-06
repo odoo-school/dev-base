@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- New Odoo UI Icons with the prefix "oi-"
+         Source: odoo/addons/web/static/lib/odoo_ui_icons
+
+         - https://www.carbondesignsystem.com/guidelines/icons/library/
+         - https://github.com/carbon-design-system/carbon-icons
+         - https://github.com/google/material-design-icons
+
+        .oi-view-pivot:before { content: '\e800'; }
+        .oi-text-break:before { content: '\e801'; }
+        .oi-text-inline:before { content: '\e802'; }
+        .oi-voip:before { content: '\e803'; }
+        .oi-odoo:before { content: '\e806'; }
+        .oi-search:before { content: '\e808'; }
+        .oi-group:before { content: '\e80a'; }
+        .oi-settings-adjust:before { content: '\e80c'; }
+        .oi-apps:before { content: '\e80d'; }
+        .oi-panel-right:before { content: '\e810'; }
+        .oi-launch:before { content: '\e812'; }
+        .oi-studio:before { content: '\e813'; }
+        .oi-view-kanban:before { content: '\e814'; }
+        .oi-text-wrap:before { content: '\e815'; }
+        .oi-view-cohort:before { content: '\e816'; }
+        .oi-view-list:before { content: '\e817'; }
+        .oi-gif-picker:before { content: '\e82e'; }
+        .oi-chevron-down:before { content: '\e839'; }
+        .oi-chevron-left:before { content: '\e83a'; }
+        .oi-chevron-right:before { content: '\e83b'; }
+        .oi-chevron-up:before { content: '\e83c'; }
+        .oi-arrows-h:before { content: '\e83d'; }
+        .oi-arrows-v:before { content: '\e83e'; }
+        .oi-arrow-down-left:before { content: '\e83f'; }
+        .oi-arrow-down-right:before { content: '\e840'; }
+        .oi-arrow-down:before { content: '\e841'; }
+        .oi-arrow-left:before { content: '\e842'; }
+        .oi-arrow-right:before { content: '\e843'; }
+        .oi-arrow-up-left:before { content: '\e844'; }
+        .oi-arrow-up-right:before { content: '\e845'; }
+        .oi-arrow-up:before { content: '\e846'; }
+        .oi-draggable:before { content: '\e847'; }
+        .oi-view:before { content: '\e861'; }
+        .oi-archive:before { content: '\e862'; }
+        .oi-unarchive:before { content: '\e863'; }
+        .oi-text-effect:before { content: '\e827'; }
+        .oi-smile-add:before { content: '\e84e'; }
+        .oi-close:before { content: '\e852'; }
+    -->
+
+    <record id="social_subscriber_alternate_view_form" model="ir.ui.view">
+        <field name="name">social.subscriber.alternate.form</field>
+        <field name="model">social.subscriber</field>
+        <field name="priority" eval="100"/>
+        <field name="arch" type="xml">
+            <form>
+                <!-- Header: contains buttons and the "statusbar" widget -->
+                <header>
+                    <button string="Archive" name="toggle_active" type="object" icon="oi-archive" class="btn-warning" invisible="not active" data-hotkey="x"/>
+                    <button string="Restore" name="toggle_active" type="object" icon="oi-unarchive" invisible="active" data-hotkey="x"/>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}" statusbar_visible="new,registered"/>
+                </header>
+
+                <!-- Warning Block: can be shown in some condition to notify users -->
+                <div class="alert alert-warning oe_edit_only" role="alert" name="warning_company" invisible="client_bonus &lt;= 0">
+                    A subscriber has bonuses, offer him/her your services. The current bonus amount is <field name="client_bonus"/>
+                </div>
+
+                <sheet>
+                    <!-- Invisible fields: they are invisible but is used in the form logic -->
+                    <field name="active" invisible="1"/>
+                    <field name="is_confirmed" invisible="1"/>
+                    <field name="client_currency_id" invisible="1"/>
+                    <field name="filename" invisible="1" force_save="1"/>
+
+                    <!-- Button Box: a section for the Stat Buttons -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_get_promo"
+                                class="oe_stat_button"
+                                type="object"
+                                icon="fa-percent"
+                        >
+                            <!-- Two lines: Text and Value -->
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Promotions</span>
+                                <field name="promo_count" class="o_stat_value"/>
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- Ribbon Widgets -->
+                    <widget name="web_ribbon" title="Confirmed" bg_color="text-bg-info" invisible="not is_confirmed"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+
+                    <!-- Image on the right top corner -->
+                    <field name="photo" widget='image' class="oe_avatar" options='{"preview_image": "photo"}'/>
+
+                    <!-- Title Block -->
+                    <div class="oe_title">
+                        <field name="social_service" widget="radio" options="{'horizontal': true}" groups="base.group_no_one"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Shevchenko Taras" default_focus="1"/>
+                        </h1>
+                    </div>
+
+                    <!-- Main Block -->
+                    <group>
+                        <group>
+                            <field name="nickname"/>
+                            <field name="birthday"/>
+                            <separator string="Identification" colspan="2"/>
+                            <field name="passport" widget="binary" filename="filename" options="{'accepted_file_extensions': '.pdf,.jpg'}"/>
+                        </group>
+                        <group>
+                            <field name="client_bonus"/>
+                            <newline/>
+                            <field name="start_date" string="Valid Period" widget="daterange" options="{'end_date_field': 'end_date'}" required="start_date or end_date" />
+                            <field name="end_date" invisible="1" required="start_date"/>
+                        </group>
+                    </group>
+
+                    <!-- Notebook: use it to separate a different field groups -->
+                    <notebook>
+                        <page string="Profile" name="profile">
+                            <group>
+                                <field name="profile_url" widget="url"/>
+                                <field name="profile" widget="html" options="{'codeview': True}" class="oe-bordered-editor" nolabel="1" colspan="2"/>
+                            </group>
+                        </page>
+                        <page string="Technical" name="technical" groups="base.group_no_one">
+                            <group>
+                                <field name="create_uid"/>
+                                <field name="create_date"/>
+                            </group>
+                        </page>
+                    </notebook>
+
+                </sheet>
+
+                <!-- Chatter Block:
+                     you should add it if you add the "mail.thread"/"mail.activity.mixin" mixins to your model -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- Rewrite the alternative tree view action to add the "form" view -->
+    <record id="school_lesson_4_2.action_social_subscriber_list" model="ir.actions.act_window">
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('school_lesson_4_2.social_subscriber_alternate_view_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('social_subscriber_alternate_view_form')}),
+        ]"/>
+    </record>
+
+    <!-- Make the alternative tree view available to open a single form view -->
+    <record id="social_subscriber_alternate_view_tree" model="ir.ui.view">
+        <field name="name">social.subscriber.alternate.tree.inherit.school_lesson_4_3</field>
+        <field name="model">social.subscriber</field>
+        <field name="inherit_id" ref="school_lesson_4_2.social_subscriber_alternate_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="editable"></attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
