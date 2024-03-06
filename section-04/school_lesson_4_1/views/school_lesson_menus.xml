@@ -4,6 +4,7 @@
     <!-- Menu items with a hierarchy (you may do not specify the "parent_id") -->
     <menuitem id="menu_social_root" name="Social" web_icon="school_lesson_4_1,static/description/icon.png" sequence="1">
         <menuitem id="menu_social_subscribers" name="Subscribers" sequence="10"/>
+        <menuitem id="menu_social_config" name="Configuration" sequence="100"/>
     </menuitem>
 
     <!-- Menu items with the "parent_id" -->

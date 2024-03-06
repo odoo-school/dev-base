@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="social_subscriber_alternate_view_tree" model="ir.ui.view">
+        <field name="name">social.subscriber.view.form.inherit.school_lesson_4_2</field>
+        <field name="model">social.subscriber</field>
+        <field name="priority" eval="100"/>
+        <field name="arch" type="xml">
+            <tree
+                    delete="false"
+                    duplicate="0"
+                    editable="bottom"
+                    default_order="birthday DESC"
+                    decoration-bf="client_bonus &gt; 0"
+                    decoration-it="state == 'registered'"
+                    decoration-muted="not active"
+                    decoration-info="social_service == 'facebook'"
+                    decoration-success="social_service == 'tiktok'"
+                    decoration-primary="social_service == 'instagram'"
+                    decoration-warning="social_service == 'undefined'"
+                    decoration-danger="social_service == 'youtube'"
+            >
+
+<!-- Additional options for the "tree" tag -->
+<!--                    create="true"-->
+<!--                    edit="true"-->        <!-- Do not use together with the "editable" -->
+<!--                    duplicate="true"-->
+<!--                    import="false"-->
+<!--                    expand="1"-->
+<!--                    multi_edit="true"-->
+<!--                    sample="1"-->
+<!--                    no_open="1"-->
+<!--                    open_form_view="1"-->
+
+                <!-- Invisible Fields: you should specify them to use in the decorations -->
+                <field name="is_confirmed" column_invisible="True"/>
+                <field name="nickname" column_invisible="True"/>
+                <field name="client_currency_id" column_invisible="True"/>
+
+                <!-- Visible Fields -->
+                <field name="sequence" widget="handle"/>
+                <field name="photo" widget="image" options='{"size": [30, 30]}' nolabel="1" optional="show"/>
+                <field name="display_name" string="Name"/>
+                <field name="social_service"/>
+                <field name="email" optional="hide"/>
+                <field name="birthday" optional="show"/>
+                <field name="client_bonus" sum="Total" optional="show"/>
+                <field name="state"/>
+                <field name="profile_url" column_invisible="True"/>
+                <button name="action_open_profile" title="Open the profile link" type="object" icon="fa-external-link" invisible="not profile_url"/>
+                <field name="active" column_invisible="True"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_social_subscriber_list" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Subscribers (Alternative List View)</field>
+        <field name="res_model">social.subscriber</field>
+        <field name="view_mode">tree</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('social_subscriber_alternate_view_tree')}),
+        ]"/>
+    </record>
+
+    <menuitem id="menu_social_subscriber_alternative_list"
+              name="Subscribers (Alternative List View)"
+              parent="school_lesson_4_1.menu_social_config"
+              action="action_social_subscriber_list"
+              sequence="10"
+    />
+
+</odoo>
