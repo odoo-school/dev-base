@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="social_subscriber_view_pivot" model="ir.ui.view">
+        <field name="name">social.subscriber.view.pivot</field>
+        <field name="model">social.subscriber</field>
+        <field name="arch" type="xml">
+            <pivot disable_linking="True" display_quantity="False" sample="1">
+                <field name="social_service" type="row"/>
+                <field name="state" type="row"/>
+                <field name="create_date" interval="month" type="col" />
+                <field name="client_bonus" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="social_subscriber_view_graph" model="ir.ui.view">
+        <field name="name">social.subscriber.view.graph</field>
+        <field name="model">social.subscriber</field>
+        <field name="arch" type="xml">
+            <graph type="bar" stacked="1" order="desc" disable_linking="0" sample="0">
+                <field name="social_service"/>
+                <field name="state"/>
+<!--                <field name="client_bonus" type="measure"/>-->
+            </graph>
+        </field>
+    </record>
+
+    <!-- Extend the subscriber list action to add new views -->
+    <record id="school_lesson_3_1.action_social_subscriber_list" model="ir.actions.act_window">
+        <field name="view_mode">tree,pivot,graph,form</field>
+    </record>
+
+</odoo>
