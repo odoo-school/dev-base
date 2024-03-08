@@ -2,7 +2,9 @@
 <odoo>
 
     <!-- New Odoo UI Icons with the prefix "oi-"
-         Source: odoo/addons/web/static/lib/odoo_ui_icons
+         Source:
+            odoo/addons/web/static/lib/odoo_ui_icons
+            https://www.odoo.com/documentation/17.0/developer/reference/user_interface/icons.html
 
          - https://www.carbondesignsystem.com/guidelines/icons/library/
          - https://github.com/carbon-design-system/carbon-icons
@@ -112,6 +114,7 @@
                             <field name="passport" widget="binary" filename="filename" options="{'accepted_file_extensions': '.pdf,.jpg'}"/>
                         </group>
                         <group>
+                            <field name="bank_id" options="{'no_open': True, 'no_create': True, 'no_create_edit': True, 'no_quick_create': True}"/>
                             <field name="client_bonus"/>
                             <newline/>
                             <field name="start_date" string="Valid Period" widget="daterange" options="{'end_date_field': 'end_date'}" required="start_date or end_date" />
@@ -144,6 +147,9 @@
                     <field name="activity_ids"/>
                     <field name="message_ids"/>
                 </div>
+
+                <!-- Attachments Block -->
+                <div class="o_attachment_preview"/>
 
             </form>
         </field>
