@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="social_subscriber_view_search" model="ir.ui.view">
+        <field name="name">social.subscriber.view.search</field>
+        <field name="model">social.subscriber</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Name" filter_domain="['|', ('name', 'ilike', self), ('nickname', 'ilike', self)]"/>
+                <field name="social_service" filter_domain="[('social_service', 'ilike', self)]"/>
+                <field name="client_bonus" string="Bonus Amount is greater than" operator="&gt;"/>
+                <field name="country_id" domain="[('zip_required', '=', True)]"/>
+                <separator/>
+                <filter string="Archived" name="filter_archived" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter name="filter_create_date" string="Created" date="create_date" default_period="this_month"/>
+                <!-- Available Time Periods for the "default_period" attribute:
+                     'this_month', 'last_month', 'antepenultimate_month',
+                     'first_quarter', 'second_quarter', 'third_quarter', 'fourth_quarter',
+                     'this_year', 'last_year', 'antepenultimate_year',
+                -->
+                <separator/>
+                <filter name="filter_facebook" string="Facebook" domain="[('social_service', '=', 'facebook')]"/>
+                <filter name="filter_instagram" string="Instagram" domain="[('social_service', '=', 'instagram')]"/>
+                <filter name="filter_tiktok" string="TikTok" domain="[('social_service', '=', 'tiktok')]"/>
+                <group>
+                    <filter name="group_by_social_service" string="Social Service" context="{'group_by': 'social_service'}"/>
+                    <filter name="group_by_state" string="Status" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter name="group_by_is_confirmed" string="Confirmed" context="{'group_by': 'is_confirmed'}"/>
+                    <filter name="group_by_birthday" string="Birthday" context="{'group_by': 'birthday:month'}"/>
+                </group>
+                <searchpanel view_types="list,pivot">
+                    <field name="state" icon="fa-adjust" color="red"/>
+                    <field name="social_service" select="multi" icon="fa-facebook-square" enable_counters="1"/>
+                    <field name="bank_id" select="multi" domain="[('bic', '!=', False)]" icon="fa-bank"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+</odoo>
