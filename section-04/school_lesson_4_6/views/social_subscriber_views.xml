@@ -102,12 +102,12 @@
                     quick_create="1"
                     delete="false"
                     create_name_field="display_name"
+                    form_view_id="%(school_lesson_4_3.social_subscriber_alternate_view_form)d"
             >
                 <!-- Additional "kanban" tag attributes -->
                 <!-- date_stop="end_date" -->
                 <!-- date_delay="duration" -->
                 <!-- mode="day" | Available values: day, week, month, year -->
-                <!-- form_view_id="school_lesson_4_6.social_subscriber_quick_view_calendar" -->
                 <!-- event_open_popup="duration" -->
 
                 <field name="social_service" filters="True"/>
