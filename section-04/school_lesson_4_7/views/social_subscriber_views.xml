@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="social_subscriber_view_kanban" model="ir.ui.view">
+        <field name="name">social.subscriber.view.kanban.inherit.school_lesson_4_7</field>
+        <field name="model">social.subscriber</field>
+        <field name="inherit_id" ref="school_lesson_4_6.social_subscriber_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//strong[hasclass('o_kanban_record_title')]" position="after">
+                <button name="action_show_promo_from_kanban" string="Promo" type="object" class="btn-sm btn-primary float-end" icon="fa-bullhorn"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="add_50_bonus_server_action" model="ir.actions.server">
+        <field name="name">Add 50 Bonuses</field>
+        <field name="model_id" ref="school_lesson_3_1.model_social_subscriber"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.add_50_bonus()
+        </field>
+    <!-- Available variables in the "code" tag:
+         env: Odoo Environment on which the action is triggered
+         model: Odoo Model of the record on which the action is triggered; is a void recordset
+         record: record on which the action is triggered; may be void
+         records: recordset of all records on which the action is triggered in multi-mode; may be void
+         time, datetime, dateutil, timezone: useful Python libraries
+         float_compare: Odoo function to compare floats based on specific precisions
+         log: log(message, level='info'): logging function to record debug information in ir.logging table
+         UserError: Warning Exception to use with raise
+         Command: x2Many commands namespace
+
+         To return an action, assign: action = {...} -->
+        <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+        <field name="binding_model_id" ref="school_lesson_3_1.model_social_subscriber"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="binding_type">action</field>
+    </record>
+
+    <record id="show_promo_server_action" model="ir.actions.server">
+        <field name="name">View Promotions</field>
+        <field name="model_id" ref="school_lesson_3_1.model_social_subscriber"/>
+        <field name="state">code</field>
+        <field name="code">
+            if record:
+                action = record.action_show_promo_from_kanban()
+        </field>
+        <field name="binding_model_id" ref="school_lesson_3_1.model_social_subscriber"/>
+        <field name="binding_view_types">form</field>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="ir_cron_increase_bonus" model="ir.cron" forcecreate="True">
+        <field name="name">Social: Bonus increasing</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="model_id" ref="school_lesson_3_1.model_social_subscriber"/>
+        <field name="state">code</field>
+        <field name="code">model._task_increase_bonus_per_month()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d 01:00:00')"/>
+    </record>
+
+</odoo>
